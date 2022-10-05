@@ -7,14 +7,20 @@ services:
      - TOKEN=${TOKEN}
      - APP_IDS=${APP_IDS}
      - CH_HOST=http://db:8123
+     - DEBUG=1
+     - FRESH_LIMIT=1
+     - UPDATE_LIMIT=1
     volumes:
      - loader-data:/usr/src/data
     depends_on:
      - db
   db:
     image: 'yandex/clickhouse-server'
+    ports:
+     - 8123:8123
+     - 9000:9000  
     volumes:
-      - db-data:/var/lib/clickhouse
+     - db-data:/var/lib/clickhouse
 volumes:
   loader-data:
   db-data:
